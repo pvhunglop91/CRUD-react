@@ -2,10 +2,11 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { createUser } from '../services/UserService';
+import { toast } from 'react-toastify';
 
 const ModalAddNewUser = (props) => {
 
-    const { show, handleClose } = props;
+    const { show, handleClose, handleUpdateUser } = props;
     const [name, setName] = useState("")
     const [job, setJob] = useState("")
 
@@ -18,9 +19,13 @@ const ModalAddNewUser = (props) => {
             setName('');
             setJob('');
             // alert("thanh cong")s
+            toast.success("Add new user success")
+            handleUpdateUser({ first_name: name, id: res.id })
         }
         else {
             // error
+            toast.error("An error")
+
         }
         // console.log("check>>", "name: ", name, "job", job)
     }
